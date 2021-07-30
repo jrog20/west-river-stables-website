@@ -35,8 +35,12 @@ class LoginContainer extends Component {
   render() {
     return (
       <div>
-        <Login handleOnChange={this.handleOnChange} handleOnSubmit={this.handleOnSubmit} email={this.state.loginForm.email} password={this.state.loginForm.password}/>
-        
+        <Login 
+          handleOnChange={this.handleOnChange} 
+          handleOnSubmit={this.handleOnSubmit} 
+          email={this.state.loginForm.email} 
+          password={this.state.loginForm.password}
+        />
       </div>
     );
   }
