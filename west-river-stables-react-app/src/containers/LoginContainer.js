@@ -45,13 +45,27 @@ class LoginContainer extends Component {
 
     fetch('http://localhost:3000/login', headers)
       .then(response => response.json())
-      .then(console.log)
+      .then(userJSON => {
+        if (userJSON.error) {
+          // incorrect user
+          alert("Invalid login. Please try again.")
+        } else {
+          // correct user login
+          this.setState({
+            currentUser: userJSON
+          })
+        }
+      })
       .catch(console.log)
   }
 
   render() {
+    const { currentUser } = this.state
     return (
       <div>
+        <h3>
+          { currentUser ? `Welcome, ${currentUser.username}!` : 'Not logged in'}
+        </h3>
         <Login 
           handleOnChange={this.handleOnChange} 
           handleOnSubmit={this.handleOnSubmit} 
