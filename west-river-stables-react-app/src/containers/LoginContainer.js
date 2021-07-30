@@ -29,7 +29,24 @@ class LoginContainer extends Component {
 
   handleOnSubmit = event => {
     event.preventDefault()
-    console.log('doing nothing')
+    // Submit info from the form to the backend to authenticate
+    // the user and, if valid, send the user back to the front end.
+    // With the response, set the state.
+    const userInfo = this.state.loginForm
+    const headers = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        user: userInfo
+      })
+    }
+
+    fetch('http://localhost:3000/login', headers)
+      .then(response => response.json())
+      .then(console.log)
+      .catch(console.log)
   }
 
   render() {
