@@ -57,10 +57,10 @@ class LoginContainer extends Component {
           // correct user login
           this.setState({
             currentUser: resp.user,
-            // loginForm: {
-            //   email: "",
-            //   password: ""
-            // }
+            loginForm: {
+              email: "",
+              password: ""
+            }
           })
         }
       })
@@ -86,18 +86,22 @@ class LoginContainer extends Component {
 
   render() {
     const { currentUser } = this.state
+    // const { currentUser } = this.props
     return (
       <div>
         <h3>
           { currentUser ? `Welcome, ${currentUser.username}!` : 'Not logged in'}
         </h3>
-        <Login 
-          handleOnChange={this.handleOnChange} 
-          handleOnSubmit={this.handleOnSubmit} 
-          email={this.state.loginForm.email} 
-          password={this.state.loginForm.password}
-        />
-        <Logout logout={this.logout}/>
+        {
+          currentUser? 
+          <Logout logout={this.logout}/> :
+          <Login 
+            handleOnChange={this.handleOnChange} 
+            handleOnSubmit={this.handleOnSubmit} 
+            email={this.state.loginForm.email} 
+            password={this.state.loginForm.password}
+          />
+        }
       </div>
     );
   }
