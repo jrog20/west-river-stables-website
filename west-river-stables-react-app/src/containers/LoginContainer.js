@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
+// import React from 'react';
 import Login from '../components/Login';
-
-// import { connect } from 'react-redux'
+import Logout from '../components/Logout';
+import { connect } from 'react-redux';
+import { getCurrentUser } from '../actions/currentUser.js'
 
 class LoginContainer extends Component {
-  // Added for userlogin - Is it good practice to have this here, 
-  // or should it be in login component?
   constructor() {
     super()
     this.state = {
@@ -13,8 +13,13 @@ class LoginContainer extends Component {
       loginForm: {
         email: "",
         password: ""
-      }
+      },
+      secrets: []
     }
+  }
+
+  componentDidMount() {
+    this.props.getCurrentUser()
   }
 
   handleOnChange = event => {
@@ -35,6 +40,7 @@ class LoginContainer extends Component {
     const userInfo = this.state.loginForm
     const headers = {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -42,7 +48,7 @@ class LoginContainer extends Component {
         user: userInfo
       })
     }
-
+  
     fetch('http://localhost:3000/login', headers)
       .then(response => response.json())
       .then(userJSON => {
@@ -52,12 +58,16 @@ class LoginContainer extends Component {
         } else {
           // correct user login
           this.setState({
-            currentUser: userJSON
+            currentUser: userJSON.user,
+            // loginForm: {
+            //   email: "",
+            //   password: ""
+            // }
           })
         }
       })
       .catch(console.log)
-  }
+    }
 
   render() {
     const { currentUser } = this.state
@@ -77,13 +87,22 @@ class LoginContainer extends Component {
   }
 }
 
-export default LoginContainer
+const mapStateToProps = ({ currentUser }) => {
+  return {
+    currentUser
+  }
+}
+
+export default connect(mapStateToProps, { getCurrentUser: getCurrentUser })(LoginContainer);
+
+// uncomment this one line
+// export default LoginContainer
+// export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer)
 
 // import React, { Component } from 'react';
-// // import React from 'react';
 // import Login from '../components/Login';
-// import { connect } from 'react-redux';
-// import { getCurrentUser } from '../actions/currentUser.js'
+
+// // import { connect } from 'react-redux'
 
 // class LoginContainer extends Component {
 //   // Added for userlogin - Is it good practice to have this here, 
@@ -95,13 +114,8 @@ export default LoginContainer
 //       loginForm: {
 //         email: "",
 //         password: ""
-//       },
-//       secrets: []
+//       }
 //     }
-//   }
-
-//   componentDidMount() {
-//     this.props.getCurrentUser()
 //   }
 
 //   handleOnChange = event => {
@@ -122,7 +136,6 @@ export default LoginContainer
 //     const userInfo = this.state.loginForm
 //     const headers = {
 //       method: 'POST',
-//       credentials: 'include',
 //       headers: {
 //         'Content-Type': 'application/json'
 //       },
@@ -130,7 +143,7 @@ export default LoginContainer
 //         user: userInfo
 //       })
 //     }
-  
+
 //     fetch('http://localhost:3000/login', headers)
 //       .then(response => response.json())
 //       .then(userJSON => {
@@ -140,16 +153,12 @@ export default LoginContainer
 //         } else {
 //           // correct user login
 //           this.setState({
-//             currentUser: userJSON.user,
-//             // loginForm: {
-//             //   email: "",
-//             //   password: ""
-//             // }
+//             currentUser: userJSON
 //           })
 //         }
 //       })
 //       .catch(console.log)
-//     }
+//   }
 
 //   render() {
 //     const { currentUser } = this.state
@@ -169,14 +178,4 @@ export default LoginContainer
 //   }
 // }
 
-// const mapStateToProps = ({ currentUser }) => {
-//   return {
-//     currentUser
-//   }
-// }
-
-// export default connect(mapStateToProps, { getCurrentUser: getCurrentUser })(LoginContainer);
-
-// // uncomment this one line
-// // export default LoginContainer
-// // export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer)
+// export default LoginContainer
