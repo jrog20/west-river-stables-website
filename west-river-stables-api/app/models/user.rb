@@ -6,9 +6,9 @@ class User < ApplicationRecord
 
   def user_serializer
     {
-      username: user.username,
-      email: user.email,
-      id: user.id
+      username: username,
+      email: email,
+      id: id
     }
   end
 end
