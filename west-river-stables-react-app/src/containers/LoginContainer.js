@@ -1,10 +1,9 @@
-// import React, { Component } from 'react';
-import React from 'react';
+import React, { Component } from 'react';
 import Login from '../components/Login';
-import { connect } from 'react-redux';
-import { getCurrentUser } from '../actions/currentUser.js'
 
-class LoginContainer extends React.Component {
+// import { connect } from 'react-redux'
+
+class LoginContainer extends Component {
   // Added for userlogin - Is it good practice to have this here, 
   // or should it be in login component?
   constructor() {
@@ -14,13 +13,8 @@ class LoginContainer extends React.Component {
       loginForm: {
         email: "",
         password: ""
-      },
-      secrets: []
+      }
     }
-  }
-
-  componentDidMount() {
-    this.props.getCurrentUser()
   }
 
   handleOnChange = event => {
@@ -41,7 +35,6 @@ class LoginContainer extends React.Component {
     const userInfo = this.state.loginForm
     const headers = {
       method: 'POST',
-      credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -49,7 +42,7 @@ class LoginContainer extends React.Component {
         user: userInfo
       })
     }
-  
+
     fetch('http://localhost:3000/login', headers)
       .then(response => response.json())
       .then(userJSON => {
@@ -59,16 +52,12 @@ class LoginContainer extends React.Component {
         } else {
           // correct user login
           this.setState({
-            currentUser: userJSON.user,
-            // loginForm: {
-            //   email: "",
-            //   password: ""
-            // }
+            currentUser: userJSON
           })
         }
       })
       .catch(console.log)
-    }
+  }
 
   render() {
     const { currentUser } = this.state
@@ -88,14 +77,106 @@ class LoginContainer extends React.Component {
   }
 }
 
-const mapStateToProps = ({ currentUser }) => {
-  return {
-    currentUser
-  }
-}
+export default LoginContainer
 
-export default connect(mapStateToProps, { getCurrentUser: getCurrentUser })(LoginContainer);
+// import React, { Component } from 'react';
+// // import React from 'react';
+// import Login from '../components/Login';
+// import { connect } from 'react-redux';
+// import { getCurrentUser } from '../actions/currentUser.js'
 
-// uncomment this one line
-// export default LoginContainer
-// export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer)
+// class LoginContainer extends Component {
+//   // Added for userlogin - Is it good practice to have this here, 
+//   // or should it be in login component?
+//   constructor() {
+//     super()
+//     this.state = {
+//       currentUser: null,
+//       loginForm: {
+//         email: "",
+//         password: ""
+//       },
+//       secrets: []
+//     }
+//   }
+
+//   componentDidMount() {
+//     this.props.getCurrentUser()
+//   }
+
+//   handleOnChange = event => {
+//     const { name, value } = event.target
+//     this.setState({
+//       loginForm: {
+//         ...this.state.loginForm,
+//         [name]: value
+//       }
+//     })
+//   }
+
+//   handleOnSubmit = event => {
+//     event.preventDefault()
+//     // Submit info from the form to the backend to authenticate
+//     // the user and, if valid, send the user back to the front end.
+//     // With the response, set the state.
+//     const userInfo = this.state.loginForm
+//     const headers = {
+//       method: 'POST',
+//       credentials: 'include',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify({
+//         user: userInfo
+//       })
+//     }
+  
+//     fetch('http://localhost:3000/login', headers)
+//       .then(response => response.json())
+//       .then(userJSON => {
+//         if (userJSON.error) {
+//           // incorrect user
+//           alert("Invalid login. Please try again.")
+//         } else {
+//           // correct user login
+//           this.setState({
+//             currentUser: userJSON.user,
+//             // loginForm: {
+//             //   email: "",
+//             //   password: ""
+//             // }
+//           })
+//         }
+//       })
+//       .catch(console.log)
+//     }
+
+//   render() {
+//     const { currentUser } = this.state
+//     return (
+//       <div>
+//         <h3>
+//           { currentUser ? `Welcome, ${currentUser.username}!` : 'Not logged in'}
+//         </h3>
+//         <Login 
+//           handleOnChange={this.handleOnChange} 
+//           handleOnSubmit={this.handleOnSubmit} 
+//           email={this.state.loginForm.email} 
+//           password={this.state.loginForm.password}
+//         />
+//       </div>
+//     );
+//   }
+// }
+
+// const mapStateToProps = ({ currentUser }) => {
+//   return {
+//     currentUser
+//   }
+// }
+
+// export default connect(mapStateToProps, { getCurrentUser: getCurrentUser })(LoginContainer);
+
+// // uncomment this one line
+// // export default LoginContainer
+// // export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer)

@@ -1,5 +1,5 @@
-// import React, { Component } from 'react';
-import React from 'react';
+import React, { Component } from 'react';
+// import React from 'react';
 import './App.css';
 // import { connect } from 'react-redux';
 import NavBar from './components/NavBar';
@@ -13,7 +13,7 @@ import Footer from './components/Footer';
 // Switch allows only one route to show at a time
 import { Switch, Route } from 'react-router-dom';
 
-class App extends React.Component {
+class App extends Component {
   
   render() {
     return (
