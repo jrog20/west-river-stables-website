@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import Login from '../components/Login';
 import Logout from '../components/Logout';
 import { connect } from 'react-redux';
-import { getCurrentUser } from '../actions/currentUser.js'
+import { getCurrentUser } from '../actions/currentUser.js';
+// Added
+import Secrets from '../components/Secrets.js';
 
 class LoginContainer extends Component {
   constructor() {
@@ -84,6 +86,28 @@ class LoginContainer extends Component {
     })
   }
 
+  // Added getSecrets
+  getSecrets = () => {
+    fetch("http://localhost:3000/secrets", {
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => response.json())
+      .then(secrets => {
+        if (secrets.error) {
+          alert("Not authorized for those secrets")
+        } else {
+          // success
+          this.setState({
+            secrets
+          })
+        }
+      })
+      .catch(console.log)
+  }
+
   render() {
     const { currentUser } = this.state
     // const { currentUser } = this.props
@@ -102,6 +126,9 @@ class LoginContainer extends Component {
             password={this.state.loginForm.password}
           />
         }
+        {/* Added for testing/debugging */}
+        <button onClick={this.getSecrets}>Show User's Secrets</button>
+        <Secrets secrets={this.state.secrets}/>
       </div>
     );
   }
