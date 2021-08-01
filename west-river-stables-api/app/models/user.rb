@@ -4,6 +4,7 @@ class User < ApplicationRecord
   validates :email, :username, presence: true
   validates :email, :username, uniqueness: true
 
+  # Should this be refactored/moved to a serializer?
   def user_serializer
     {
       username: username,
