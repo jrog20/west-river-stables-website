@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-// import React from 'react';
 import './App.css';
-// import { connect } from 'react-redux';
 import NavBar from './components/NavBar';
 import HomeContainer from './containers/HomeContainer';
 import About from './components/About';
@@ -25,12 +23,9 @@ class App extends Component {
           <Route exact path="/services" component={Services} />
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/login" component={LoginContainer} 
-          // handleOnChange={this.handleOnChange} handleOnSubmit={this.handleOnSubmit} email={this.state.loginForm.email} password={this.state.loginForm.password}
           />
           <Route component={NotFound} />
         </Switch>
-        {/* Don't want this to render on the homepage
-        <Login handleOnChange={this.handleOnChange} handleOnSubmit={this.handleOnSubmit} email={this.state.loginForm.email} password={this.state.loginForm.password}/> */}
         <Footer />
       </div>
     );

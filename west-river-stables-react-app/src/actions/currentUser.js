@@ -5,6 +5,8 @@ export const setCurrentUser = ({user}) => {
   }
 }
 
+// Something here may be preventing keeping login when refreshing page? Or somewhere in sessions controller?
+
 //async action creators
 export const getCurrentUser = userCredentials => {
   return dispatch => {
@@ -25,3 +27,25 @@ export const getCurrentUser = userCredentials => {
     .catch(console.log)
   }
 }
+
+// refactored from this
+
+// componentDidMount() {
+//   fetch("http://localhost:3000/get_current_user", {
+//     credentials: "include",
+//     headers: {
+//       "Content-Type": "application/json"
+//     }
+//   })
+//   .then(r => r.json())
+//   .then(resp => {
+//     if (resp.error) {
+//       alert(resp.error)
+//     } else {
+//       this.setState({
+//         currentUser: resp.user
+//       })
+//     }
+//   })
+//   .catch(console.log)
+// }
