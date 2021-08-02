@@ -10,7 +10,8 @@ class LoginContainer extends Component {
   constructor() {
     super()
     this.state = {
-      currentUser: null,
+      // replace this line with mapStateToProps
+      // currentUser: null,
       loginForm: {
         email: "",
         password: ""
@@ -109,8 +110,9 @@ class LoginContainer extends Component {
   }
 
   render() {
-    const { currentUser } = this.state
-    // const { currentUser } = this.props
+    // Need to change this from state to props, but something is not connected correctly
+    // const { currentUser } = this.state
+    const { currentUser } = this.props
     return (
       <div>
         <h3>
