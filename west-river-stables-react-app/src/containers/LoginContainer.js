@@ -11,7 +11,7 @@ class LoginContainer extends Component {
     super()
     this.state = {
       // replace this line with mapStateToProps
-      // currentUser: null,
+      currentUser: null,
       loginForm: {
         email: "",
         password: ""
@@ -53,6 +53,8 @@ class LoginContainer extends Component {
     fetch('http://localhost:3000/login', headers)
       .then(response => response.json())
       .then(resp => {
+        console.log(resp)
+        console.log(resp.user)
         if (resp.error) {
           // incorrect user
           alert("Invalid login. Please try again.")
@@ -113,6 +115,7 @@ class LoginContainer extends Component {
     // Need to change this from state to props, but something is not connected correctly
     // const { currentUser } = this.state
     const { currentUser } = this.props
+    console.log(this.props)
     return (
       <div>
         <h3>
@@ -137,6 +140,7 @@ class LoginContainer extends Component {
 }
 
 const mapStateToProps = ({ currentUser }) => {
+  console.log(currentUser)
   return {
     currentUser
   }
