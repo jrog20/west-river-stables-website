@@ -6,6 +6,12 @@ export const setCurrentUser = ({user}) => {
   }
 }
 
+export const clearCurrentUser = () => {
+  return {
+    type: "CLEAR_CURRENT_USER"
+  }
+}
+
 // Something here may be preventing keeping login when refreshing page? Or somewhere in sessions controller?
 
 //async action creators
