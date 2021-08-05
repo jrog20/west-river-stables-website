@@ -36,3 +36,27 @@ export const getCurrentUser = () => {
     .catch(console.log)
   }
 }
+
+export const login = (credentials, history) => {
+  return dispatch => {
+    return fetch("http://localhost:3001/login", {
+      credentials: "include",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(credentials)
+    })
+      .then(r => r.json())
+      .then(response => {
+        if (response.error) {
+          alert(response.error)
+        } else {
+          dispatch(setCurrentUser(response))
+          // dispatch(resetLoginForm())
+          history.push('/')
+        }
+      })
+      .catch(console.log)
+  }
+}

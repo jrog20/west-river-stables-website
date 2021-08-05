@@ -12,7 +12,8 @@ function Login({ handleOnChange, handleOnSubmit, email, password }) {
             type="text" 
             name="email" 
             placeholder="email" 
-            value={email}
+            // Changed - this is correct?
+            value={this.props.loginFormData.email}
             onChange={handleOnChange}
           /><br/>
           {/* change back to type='password' for production */}

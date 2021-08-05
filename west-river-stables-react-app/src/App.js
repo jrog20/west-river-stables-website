@@ -11,9 +11,21 @@ import Footer from './components/Footer';
 // Switch allows only one route to show at a time
 import { Switch, Route } from 'react-router-dom';
 
+// ADDED
+import { getCurrentUser } from "./actions/currentUser.js"
+import { connect } from 'react-redux';
+
+
+
 class App extends Component {
   
+  // ADDED
+  componentDidMount() {
+    this.props.getCurrentUser()
+  }
+
   render() {
+    const { loggedIn } = this.props
     return (
       <div>
         <NavBar />
@@ -32,4 +44,11 @@ class App extends Component {
   }
 }  
 
-export default App;
+const mapStateToProps = state => {
+  return ({
+    loggedIn: !!state.currentUser,
+    // horses: state.myHorses
+  })
+}
+
+export default connect(mapStateToProps, { getCurrentUser })(App);
