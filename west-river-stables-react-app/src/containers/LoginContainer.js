@@ -1,11 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
+import { login } from "../actions/currentUser.js"
+
 import Login from '../components/Login';
 import Logout from '../components/Logout';
-import { getCurrentUser } from '../actions/currentUser.js';
+// import { getCurrentUser } from '../actions/currentUser.js';
 // NEW
 import { updateLoginForm } from "../actions/loginForm.js";
-import { login } from "../actions/currentUser.js";
+// import { login, getCurrentUser } from "../actions/currentUser.js";
+import rogerriding from '../assets/images/rogerriding.jpeg';
+
 
 const LoginContainer = ({ loginFormData, updateLoginForm, login, history, getCurrentUser }) => {
 
@@ -13,6 +17,7 @@ const LoginContainer = ({ loginFormData, updateLoginForm, login, history, getCur
   // componentDidMount() {
   //   this.props.getCurrentUser()
   // }
+
   // handleOnChange
   const handleOnChange = event => {
     const { name, value } = event.target
@@ -64,15 +69,42 @@ const LoginContainer = ({ loginFormData, updateLoginForm, login, history, getCur
       <h3> Hi
         {/* { currentUser ? `Welcome, ${currentUser.username}!` : 'Not logged in'} */}
       </h3>
+      <div className='background-image' style={{ backgroundImage: `url(${rogerriding})` }} alt="Login">
+      {/* <LoginForm /> */}
+        <form onSubmit={handleOnSubmit}>
+          <input 
+            type="text" 
+            name="email" 
+            placeholder="email" 
+            // Changed - this is correct?
+            value={loginFormData.email}
+
+            // value={loginFormData.email}
+            onChange={handleOnChange}
+          /><br/>
+          {/* change back to type='password' for production */}
+          <input 
+            type="text" 
+            name="password" 
+            placeholder="password" 
+            value={loginFormData.password}
+            onChange={handleOnChange}
+          /><br/>
+          <input 
+            type="submit" 
+            value="Login"
+          />
+        </form>
+      </div>
       {
         // currentUser? 
         // <Logout logout={this.logout}/> :
-        <Login 
-          handleOnChange={handleOnChange} 
-          handleOnSubmit={handleOnSubmit} 
-          // email={loginFormData.email} 
-          // password={loginFormData.password}
-        />
+        // <Login 
+        //   handleOnChange={handleOnChange} 
+        //   handleOnSubmit={handleOnSubmit} 
+        //   // email={loginFormData.email} 
+        //   // password={loginFormData.password}
+        // />
       }
       {/* Added for testing/debugging */}
       {/* <button onClick={this.getSecrets}>Show User's Secrets</button> */}
