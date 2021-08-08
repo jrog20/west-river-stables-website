@@ -28,14 +28,14 @@ class App extends Component {
     const { loggedIn } = this.props
     return (
       <div>
+        {/* { loggedIn ? <LoginContainer currentUser={this.props.currentUser} /> : <HomeContainer />} */}
         <NavBar />
         <Switch>
           <Route exact path="/" component={HomeContainer} />
           <Route exact path="/about" component={About} />
           <Route exact path="/services" component={Services} />
           <Route exact path="/contact" component={Contact} />
-          <Route exact path="/login" component={LoginContainer} 
-          />
+          <Route exact path="/login" component={LoginContainer} />
           <Route component={NotFound} />
         </Switch>
         <Footer />

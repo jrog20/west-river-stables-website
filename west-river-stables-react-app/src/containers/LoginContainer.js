@@ -1,17 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { login } from "../actions/currentUser.js"
 
 import Login from '../components/Login';
 import Logout from '../components/Logout';
 // import { getCurrentUser } from '../actions/currentUser.js';
 // NEW
 import { updateLoginForm } from "../actions/loginForm.js";
+import { login } from "../actions/currentUser.js"
+
 // import { login, getCurrentUser } from "../actions/currentUser.js";
 import rogerriding from '../assets/images/rogerriding.jpeg';
 
 
-const LoginContainer = ({ loginFormData, updateLoginForm, login, history, getCurrentUser }) => {
+const LoginContainer = ({ loginFormData, updateLoginForm, login, history, currentUser }) => {
 
   // CAN I PUT THIS HERE?
   // componentDidMount() {
@@ -26,6 +27,7 @@ const LoginContainer = ({ loginFormData, updateLoginForm, login, history, getCur
         [name]: value
     }
     updateLoginForm(updatedFormInfo)
+    console.log(updatedFormInfo)
   }
   
   // handleOnSubmit
@@ -66,8 +68,8 @@ const LoginContainer = ({ loginFormData, updateLoginForm, login, history, getCur
 
   return (
     <div>
-      <h3> Hi
-        {/* { currentUser ? `Welcome, ${currentUser.username}!` : 'Not logged in'} */}
+      <h3> 
+        { currentUser ? `Welcome, ${currentUser.username}!` : 'Not logged in'}
       </h3>
       <div className='background-image' style={{ backgroundImage: `url(${rogerriding})` }} alt="Login">
       {/* <LoginForm /> */}
@@ -76,10 +78,7 @@ const LoginContainer = ({ loginFormData, updateLoginForm, login, history, getCur
             type="text" 
             name="email" 
             placeholder="email" 
-            // Changed - this is correct?
             value={loginFormData.email}
-
-            // value={loginFormData.email}
             onChange={handleOnChange}
           /><br/>
           {/* change back to type='password' for production */}
@@ -115,6 +114,7 @@ const LoginContainer = ({ loginFormData, updateLoginForm, login, history, getCur
 
 const mapStateToProps = state => {
   return {
+    currentUser: state.currentUser,
     loginFormData: state.loginForm
   }
 }
