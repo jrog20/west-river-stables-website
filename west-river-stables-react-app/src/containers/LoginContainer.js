@@ -6,18 +6,12 @@ import Logout from '../components/Logout';
 // import { getCurrentUser } from '../actions/currentUser.js';
 // NEW
 import { updateLoginForm } from "../actions/loginForm.js";
-import { login } from "../actions/currentUser.js"
+import { login, logout } from "../actions/currentUser.js"
 
 // import { login, getCurrentUser } from "../actions/currentUser.js";
 import rogerriding from '../assets/images/rogerriding.jpeg';
 
-
 const LoginContainer = ({ loginFormData, updateLoginForm, login, history, currentUser }) => {
-
-  // CAN I PUT THIS HERE?
-  // componentDidMount() {
-  //   this.props.getCurrentUser()
-  // }
 
   // handleOnChange
   const handleOnChange = event => {
@@ -38,32 +32,6 @@ const LoginContainer = ({ loginFormData, updateLoginForm, login, history, curren
     // With the response, set the state.
     login(loginFormData, history)
   }
-
-  // LOGOUT HERE?
-  // logout = event => {
-  //   event.preventDefault()
-  //   fetch("http://localhost:3000/logout", {
-  //     method: "DELETE",
-  //     credentials: "include",
-  //     headers: {
-  //       "Content-Type": "application/json"
-  //     }
-  //   })
-  //     .then(response => response.json())
-  //     .then(resp => alert(resp.message))
-  //   this.setState({
-  //     currentUser: null,
-  //     secrets: []
-  //   })
-  // }
-
-  // return FORM
-    // Need to change this from state to props, but something is not connected correctly
-    // const { currentUser } = this.state
-    // console.log(this.props)
-
-    // const { currentUser } = this.props
-
     console.log(loginFormData)
 
   return (
@@ -71,8 +39,9 @@ const LoginContainer = ({ loginFormData, updateLoginForm, login, history, curren
       <h3> 
         { currentUser ? `Welcome, ${currentUser.username}!` : 'Not logged in'}
       </h3>
+      {/* <Login /> */}
+      {/* COMMENTED OUT FOR NOW... */}
       <div className='background-image' style={{ backgroundImage: `url(${rogerriding})` }} alt="Login">
-      {/* <LoginForm /> */}
         <form onSubmit={handleOnSubmit}>
           <input 
             type="text" 
@@ -95,19 +64,18 @@ const LoginContainer = ({ loginFormData, updateLoginForm, login, history, curren
           />
         </form>
       </div>
-      {
-        // currentUser? 
-        // <Logout logout={this.logout}/> :
+      {/* {
+        currentUser? 
+        <Logout logout={logout}/> 
+        :
+        <p>This is where the logout button would go</p>
         // <Login 
         //   handleOnChange={handleOnChange} 
         //   handleOnSubmit={handleOnSubmit} 
-        //   // email={loginFormData.email} 
-        //   // password={loginFormData.password}
+        //   email={loginFormData.email} 
+        //   password={loginFormData.password}
         // />
-      }
-      {/* Added for testing/debugging */}
-      {/* <button onClick={this.getSecrets}>Show User's Secrets</button> */}
-      {/* <Secrets secrets={this.state.secrets}/> */}
+      } */}
     </div>
   );
 }
