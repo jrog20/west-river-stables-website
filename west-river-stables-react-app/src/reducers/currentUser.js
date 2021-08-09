@@ -1,4 +1,4 @@
-export default function currentUserReducer(state = null, action) {
+export default function currentUser(state = null, action) {
   switch (action.type) {
     case "SET_CURRENT_USER":
      return action.user
