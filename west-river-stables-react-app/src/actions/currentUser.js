@@ -19,7 +19,7 @@ export const clearCurrentUser = () => {
 //async action creators
 export const getCurrentUser = () => {
   return dispatch => {
-    return fetch("http://localhost:3000/get_current_user", {
+    return fetch("http://localhost:3001/get_current_user", {
       credentials: "include",
       method: "GET",
       headers: {
@@ -61,4 +61,21 @@ export const login = (credentials, history) => {
       })
       .catch(console.log)
   }
+}
+
+// NEED TO ADD LOGOUT ACTION HERE
+
+export const logout = event => {
+  return dispatch => {
+    dispatch(clearCurrentUser())
+    return fetch("http://localhost:3001/logout", {
+      method: "DELETE",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      // .then(response => response.json())
+      // .then(resp => alert(resp.message))
+  }  
 }
