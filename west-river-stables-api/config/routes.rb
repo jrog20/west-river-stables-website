@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
-  # Added
-  # get '/login', to: 'sessions#create'
-
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
   get '/get_current_user', to: 'sessions#get_current_user'
+
+  # For testing
+  post '/sliders', to: 'sliders#create'
+  get '/sliders', to: 'sliders#index'
+
   resources :secrets
   resources :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
