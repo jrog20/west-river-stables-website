@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Slider from '../components/Slider';
 
 import Login from '../components/Login';
 import Logout from '../components/Logout';
@@ -39,6 +40,7 @@ const LoginContainer = ({ loginFormData, updateLoginForm, login, history, curren
       <h3> 
         { currentUser ? `Welcome, ${currentUser.username}!` : 'Not logged in'}
       </h3>
+      { currentUser ? <Slider /> : 'Not logged in'}
       {/* <Login /> */}
       {/* COMMENTED OUT FOR NOW... */}
       <div className='background-image' style={{ backgroundImage: `url(${rogerriding})` }} alt="Login">
@@ -64,18 +66,18 @@ const LoginContainer = ({ loginFormData, updateLoginForm, login, history, curren
           />
         </form>
       </div>
-      {/* {
+      {
         currentUser? 
         <Logout logout={logout}/> 
         :
-        <p>This is where the logout button would go</p>
-        // <Login 
-        //   handleOnChange={handleOnChange} 
-        //   handleOnSubmit={handleOnSubmit} 
-        //   email={loginFormData.email} 
-        //   password={loginFormData.password}
-        // />
-      } */}
+        // <p>This is where the logout button would go</p>
+        <Login 
+          handleOnChange={handleOnChange} 
+          handleOnSubmit={handleOnSubmit} 
+          email={loginFormData.email} 
+          password={loginFormData.password}
+        />
+      }
     </div>
   );
 }
