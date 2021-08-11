@@ -15,8 +15,6 @@ import { Switch, Route } from 'react-router-dom';
 import { getCurrentUser } from "./actions/currentUser.js"
 import { connect } from 'react-redux';
 
-
-
 class App extends Component {
   
   // ADDED
@@ -27,7 +25,7 @@ class App extends Component {
   render() {
     const { loggedIn } = this.props
     return (
-      <div>
+      <div className='App'>
         {/* { loggedIn ? <LoginContainer currentUser={this.props.currentUser} /> : <HomeContainer />} */}
         <NavBar />
         <Switch>

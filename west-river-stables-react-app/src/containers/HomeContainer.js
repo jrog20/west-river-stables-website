@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import HeroSection from '../components/HeroSection';
 import Cards from '../components/Cards';
-
-// import { connect } from 'react-redux'
+// Added for Bootstrap
+import BootstrapCarousel from '../components/BootstrapCarousel';
 
 class HomeContainer extends Component {
   render() {
     return (
       <div>
+        <BootstrapCarousel></BootstrapCarousel>
         <HeroSection />
         <Cards />
         {/* <HorseInput addHorse={this.props.addHorse}/>
