@@ -1,3 +1,19 @@
+/* Added to test carousel */
+
+.my__carousel_main {
+  background-color: rgb(150, 144, 144);
+  border-radius: 4px;
+  margin: 2px;
+  height: 5px;
+  width: 50px;
+}
+
+.carousel-indicators .active {
+  background-color: rgb(119, 115, 115);
+}
+
+/* Original css starts here */
+
 .image {
   object-fit: cover;
   width: 100%;
