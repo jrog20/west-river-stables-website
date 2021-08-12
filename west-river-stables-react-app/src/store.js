@@ -9,7 +9,6 @@ import loginForm from './reducers/loginForm'
 import thunk from 'redux-thunk';
 
 const reducer = combineReducers({
-  // currentUser: currentUserReducer
   currentUser,
   loginForm
 })
